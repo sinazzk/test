@@ -1,0 +1,24 @@
+import json
+
+def compare_json_files(file1, file2):
+    with open(file1, 'r') as f1, open(file2, 'r') as f2:
+        json1 = json.load(f1)
+        json2 = json.load(f2)
+
+    common_keys = set(json1.keys()) & set(json2.keys())
+    differing_keys = set(json1.keys()) ^ set(json2.keys())
+
+    print("Common keys:")
+    for key in common_keys:
+        print(key)
+
+    print("\nKeys only in", file1, ":")
+    for key in (set(json1.keys()) - set(json2.keys())):
+        print(key)
+
+    print("\nKeys only in", file2, ":")
+    for key in (set(json2.keys()) - set(json1.keys())):
+        print(key)
+
+# Usage
+compare_json_files('file1.json', 'file2.json')
